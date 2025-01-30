@@ -1,0 +1,48 @@
+#include<vector>
+#include<algorithm>
+#include <iostream>
+#include <string>
+using namespace std;
+
+string solution(string inp) {
+    // Edit your code here
+    vector<char> letters;
+    vector<char> digits;
+    string result = inp; 
+    for(char c:inp)
+    {
+        if(isalpha(c))//如果是符号
+        {
+            letters.push_back(c);
+        }
+        else if(isdigit(c))
+        {
+            digits.push_back(c);
+        }
+        
+    }
+    sort(letters.begin(),letters.end());
+    sort(digits.begin(),digits.end(),greater<char>());
+    int letterIndex = 0;
+    int digitIndex = 0;
+    for (int i = 0; i < inp.size(); ++i) {
+        if (isalpha(inp[i])) {
+            result[i] = letters[letterIndex++];
+        } else if (isdigit(inp[i])) {
+            result[i] = digits[digitIndex++];
+        }
+    }
+
+    return result;
+
+}
+
+int main() {
+    // Add your test cases here
+
+    cout << (solution("12A?zc") == "21A?cz") << endl;
+    cout << (solution("1Ad?z?t24") == "4Ad?t?z21") << endl;
+    cout << (solution("???123??zxy?") == "???321??xyz?") << endl;
+
+    return 0;
+}
